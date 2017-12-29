@@ -1,0 +1,15 @@
+# /etc/systemd/system/
+
+[Unit]
+Description=Gunicorn instance to serve flaskapp
+After=network.target
+
+[Service]
+User=####
+Group=www-data
+WorkingDirectory=/var/www/####
+Environment="PATH=/var/www/####/venv/bin"
+ExecStart=/var/www/####/venv/bin/gunicorn --workers 3 --bind unix:flaskapp.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
